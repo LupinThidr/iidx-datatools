@@ -89,7 +89,7 @@ def create_texturelist(input, output):
                 "{} {} {} {}".format(texture[0].area[0] * 2, texture[0].area[2] * 2, texture[0].area[1] * 2, texture[0].area[3] * 2),
                 __type="4u16"
             ),
-            name=os.path.splitext(texture[1])[0]
+            name=os.path.splitext(os.path.basename(texture[1]))[0]
         ) for texture in package_texture[i]],
         format="argb8888rev",
         mag_filter="nearest",
