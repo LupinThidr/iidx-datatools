@@ -1,0 +1,7 @@
+*.pyc
+output/
+*.bin
+*.dll
+*.ifs
+*.json
+*.xml

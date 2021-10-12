@@ -46,9 +46,9 @@ class PackNode(object):
 def create_texturelist(input, output):
     size = 1024,1024
 
-    names = glob.glob(input + "/*.png")
+    names = glob.glob(os.path.join(input, "*.png"))
 
-    images = [(i.size[0] * i.size[1], name, i) for name,i in ((x, Image.open(x)) for x in names)]
+    images = [(i.size[0] * i.size[1], os.path.basename(name), i) for name,i in ((x, Image.open(x)) for x in names)]
 
     tree = PackNode(size)
 
@@ -89,7 +89,7 @@ def create_texturelist(input, output):
                 "{} {} {} {}".format(texture[0].area[0] * 2, texture[0].area[2] * 2, texture[0].area[1] * 2, texture[0].area[3] * 2),
                 __type="4u16"
             ),
-            name=os.path.splitext(os.path.basename(texture[1]))[0]
+            name=os.path.splitext(texture[1])[0]
         ) for texture in package_texture[i]],
         format="argb8888rev",
         mag_filter="nearest",
@@ -105,7 +105,6 @@ def create_texturelist(input, output):
     )
 
     open(output, "wb").write(etree.tostring(texturelist, pretty_print=True))
-
 
 if __name__ == "__main__":
     create_texturelist('', 'texturelist.xml')
