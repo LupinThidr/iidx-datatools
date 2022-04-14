@@ -44,6 +44,10 @@ def create_patch(infile, outfile):
             if mm.tell() > 0x1000:
                 print(f'bm2dx.dll {hex(pe.get_rva_from_offset(mm.tell()))[2:].upper()} 6F6D6E69 {mm.read(4).hex().upper()}', file=patches)
 
+            #omni songs in legg folder
+            mm.seek(mm.find(b'\x7C\xED\x32\xC0\xC3', 0) + 2)
+            print(f'bm2dx.dll {hex(pe.get_rva_from_offset(mm.tell()))[2:].upper()} B001 {mm.read(2).hex().upper()}', file=patches)
+
             print('# === Omnimix changes end ===', file=patches)
 
             pe.close()

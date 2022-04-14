@@ -314,6 +314,8 @@ read_handlers = {
     0x1a, # ROOTAGE
     0x1b, # HEROIC VERSE
     0x1c, # BISTROVER
+    0x1d, # CASTHOUR
+    0x1e, # ???
     0x50, # INFINITAS
 }
 
@@ -327,6 +329,8 @@ write_handlers = {
     0x1a, # ROOTAGE
     0x1b, # HEROIC VERSE
     0x1c, # BISTROVER
+    0x1d, # CASTHOUR
+    0x1e, # ???
     0x50, # INFINITAS
 }
 
