@@ -1,6 +1,6 @@
-# beatmania IIDX 27 to 28 to 29 omnimix converter/creator
+# beatmania IIDX 27 to 28 to 29 to 30 omnimix converter/creator
 
-Automatically convert between Heroic Verse, Bistrover, and CastHour Omnimix.
+Automatically convert between HEROIC VERSE, BISTROVER, CastHour, and RESIDENT Omnimix.
 
 Thanks to WF for the original musicdata_tool and create_texturelist.
 

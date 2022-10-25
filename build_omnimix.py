@@ -16,7 +16,7 @@ required = [
     'music_data.bin',
     'music_omni.bin',
     'music_title_yomi.xml',
-    'music_title_yomi.xml'
+    'video_music_list.xml'
 ]
 missing = []
 for file in required:
@@ -270,6 +270,8 @@ Path("mdata.ifs").unlink()
 create_texturelist.create_texturelist(Path("mdato", "tex"), Path("mdato", "tex", "texturelist.xml"))
 
 ifstools.IFS("mdato").repack(progress=False, use_cache=True, path=Path(output, "data", "graphic", ver, "mdato.ifs"))
+# memory patch for mdat`o` broke
+shutil.copy(str(Path(output, "data", "graphic", ver, "mdato.ifs")), str(Path(output, "data", "graphic", ver, "mdata.ifs")))
 
 shutil.rmtree("mdato")
 

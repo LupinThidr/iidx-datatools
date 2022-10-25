@@ -315,7 +315,8 @@ read_handlers = {
     0x1b, # HEROIC VERSE
     0x1c, # BISTROVER
     0x1d, # CASTHOUR
-    0x1e, # ???
+    0x1e, # RESIDENT
+    0x1f, # ???
     0x50, # INFINITAS
 }
 
@@ -330,7 +331,8 @@ write_handlers = {
     0x1b, # HEROIC VERSE
     0x1c, # BISTROVER
     0x1d, # CASTHOUR
-    0x1e, # ???
+    0x1e, # RESIDENT
+    0x1f, # ???
     0x50, # INFINITAS
 }
 
