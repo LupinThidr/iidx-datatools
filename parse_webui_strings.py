@@ -35,6 +35,9 @@ with open("bm2dx.dll", "r+b") as bm2dx:
         # "GRAPHAREA",
         "CATEGORYVOICE",
         "MUSICSELECTBGM",
+        # "RIVALWINDOW",
+        # "SOUNDPREVIEW",
+        # "GRAPH CUTIN",
         "KOKOKARA START",
     )
 
@@ -87,7 +90,7 @@ with open("bm2dx.dll", "r+b") as bm2dx:
     parts = ("head", "hair", "face", "hand", "body")
     for part in parts:
         qpro_names[part] = {}
-    find_pattern(str.encode("EX-JUDGE").hex())
+    find_pattern(str.encode("A-SCR").hex())
     find_pattern(
         rb"\x01\x00\x00\x00....\x01\x00\x00\x00....\x01\x00\x00\x00", pos(), -4
     )
@@ -125,11 +128,8 @@ with open("bm2dx.dll", "r+b") as bm2dx:
             print(f"  {p}:", len(qpro_names[p]))
 
     region_names = {}
-    find_pattern(
-        "42 45 47 49 4E 4E 45 52 00 00 00 00 00 00 00 00",
-        0,
-        0x20,
-    )
+    find_pattern("53 54 41 47 45 20 48 4F 57 54 4F")
+    find_pattern("3C 00 00 00", pos())
     start = pos()
     mm.seek(start)
     if int(unpack("q", mm.read(8))[0]) == 0:
@@ -138,7 +138,7 @@ with open("bm2dx.dll", "r+b") as bm2dx:
         mm.seek(start)
     count = int(unpack("q", mm.read(8))[0])
 
-    for x in range(count):
+    for _ in range(count):
         ja_addr = unpack("q", mm.read(8))[0] - base
         en_addr = unpack("q", mm.read(8))[0] - base
         idx = int(unpack("q", mm.read(8))[0])
@@ -146,7 +146,7 @@ with open("bm2dx.dll", "r+b") as bm2dx:
         if idx == 0:
             en_addr = ja_addr
 
-        if idx == 23425:
+        if idx > 100:
             k, last_value = _, region_names[k] = region_names.popitem()
             idx = k + 1
 

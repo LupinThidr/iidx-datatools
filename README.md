@@ -5,11 +5,9 @@
 - 28 BISTROVER
 - 29 CastHour
 - 30 RESIDENT
+- 31 EPOLIS
 
-*Standalone `musicdata_tool.py` supports IIDX 20<->30+
-
-Thanks to WF for the original musicdata_tool and create_texturelist.
-
+*Standalone [music database editor](musicdata_tool.py) supports 20<->31+
 
 ## Usage
 1. `pip install -U -r requirements.txt`
@@ -18,13 +16,17 @@ Thanks to WF for the original musicdata_tool and create_texturelist.
 - (OLD VERSION OMNI `mdato.ifs`, `music_omni.bin`)
 3. Run `python build_omnimix.py`
 4. Copy the resulting output/`data` to game contents
-- mempatch_hook `iidx_omnimix_??.txt` is deprecated, use [BemaniPatcher](https://github.com/drmext/BemaniPatcher/tree/master/docs)
+- [BemaniPatcher scripts](https://github.com/drmext/BemaniPatcher/tree/master/docs) and [mempatch_hook script](mem_patch.py) are deprecated. Fix it yourself for 31+.
 5. Copy dummied sound and movie files from old base data
 
-## Extra
-`parse_webui_strings.py` outputs debug info in bm2dx.dll to json
+## Extras
+[parse_webui_strings.py](parse_webui_strings.py) outputs debug info in bm2dx.dll to json
 
 - qpro part real titles
 - sd9 system sound real titles
 - region names (Japanese and truncated English)
 - setting names (notes, frame, explosion, turntable, fullcombo, keybeam, judgestring, lanecover, categoryvoice, musicselectbgm, kokokara start)
+
+[parse_chart_notecounts.py](parse_chart_notecounts.py) outputs json for score grade calculation
+
+- supports .ifs files directly and loose .1 files in directories

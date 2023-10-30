@@ -455,36 +455,21 @@ def course_writer(outfile, data, data_ver):
                 outfile.write(struct.pack("<I", 0xFFFFFFFF))
 
 
-read_handlers = {
-    0x14,  # TRICORO
-    0x15,  # SPADA
-    0x16,  # PENDUAL
-    0x17,  # COPULA
-    0x18,  # SINOBUZ
-    0x19,  # CANNON BALLERS
-    0x1A,  # ROOTAGE
-    0x1B,  # HEROIC VERSE
-    0x1C,  # BISTROVER
-    0x1D,  # CASTHOUR
-    0x1E,  # RESIDENT
-    0x1F,  # ???
-    0x50,  # INFINITAS
-}
-
-write_handlers = {
-    0x14,  # TRICORO
-    0x15,  # SPADA
-    0x16,  # PENDUAL
-    0x17,  # COPULA
-    0x18,  # SINOBUZ
-    0x19,  # CANNON BALLERS
-    0x1A,  # ROOTAGE
-    0x1B,  # HEROIC VERSE
-    0x1C,  # BISTROVER
-    0x1D,  # CASTHOUR
-    0x1E,  # RESIDENT
-    0x1F,  # ???
-    0x50,  # INFINITAS
+handlers = {
+    20,  # TRICORO
+    21,  # SPADA
+    22,  # PENDUAL
+    23,  # COPULA
+    24,  # SINOBUZ
+    25,  # CANNON BALLERS
+    26,  # ROOTAGE
+    27,  # HEROIC VERSE
+    28,  # BISTROVER
+    29,  # CASTHOUR
+    30,  # RESIDENT
+    31,  # EPOLIS
+    32,  # ???
+    80,  # INFINITAS
 }
 
 
@@ -513,7 +498,7 @@ def extract_file(input, output, in_memory=False):
             if song_id != 0xFFFF and (len(song_ids) == 0 or song_id != 0):
                 song_ids[i] = song_id
 
-        if data_ver in read_handlers:
+        if data_ver in handlers:
             output_data = reader(data_ver, infile, available_entries)
             output_data = {
                 "data_ver": data_ver,
@@ -544,7 +529,7 @@ def create_file(input, output, data_version):
         print("Couldn't find data version")
         exit(-1)
 
-    if data_ver in write_handlers:
+    if data_ver in handlers:
         writer(data_ver, open(output, "wb"), data["data"])
     else:
         print("Couldn't find a handler for this data version")
@@ -568,7 +553,7 @@ def convert_file(input, output, data_version):
             if song_id != 0xFFFF and (len(song_ids) == 0 or song_id != 0):
                 song_ids[i] = song_id
 
-        if data_ver in read_handlers:
+        if data_ver in handlers:
             output_data = reader(data_ver, infile, available_entries)
             writer(data_ver, open(output, "wb"), output_data)
         else:
@@ -593,7 +578,7 @@ def merge_files(input, basefile, output, diff=False):
             if song_id != 0xFFFF and (len(song_ids) == 0 or song_id != 0):
                 song_ids[i] = song_id
 
-        if data_ver in read_handlers:
+        if data_ver in handlers:
             old_data = reader(data_ver, infile, available_entries)
         else:
             print("Couldn't find a handler for this input data version")
@@ -615,7 +600,7 @@ def merge_files(input, basefile, output, diff=False):
             if song_id != 0xFFFF and (len(song_ids) == 0 or song_id != 0):
                 song_ids[i] = song_id
 
-        if data_ver in read_handlers:
+        if data_ver in handlers:
             new_data = reader(data_ver, infile, available_entries)
         else:
             print("Couldn't find a handler for this input data version")
@@ -682,7 +667,7 @@ if __name__ == "__main__":
         if args.data_version is None:
             print("You must specify a target --data-version with --convert")
             exit(-1)
-        elif args.data_version not in write_handlers:
+        elif args.data_version not in handlers:
             print("Don't know how to handle specified data version")
             exit(-1)
 

@@ -45,11 +45,14 @@ ver = "0" if game_version % 2 == 0 else "1"
 Path(output, "data", "info", ver).mkdir(parents=True, exist_ok=True)
 Path(output, "data", "graphic", ver).mkdir(parents=True, exist_ok=True)
 
-
-print("Processing bm2dx.dll patches")
-mem_patch.create_patch("bm2dx.dll", Path(output, f"iidx_omnimix_{game_version}.txt"))
+if game_version < 31:
+    print("Processing bm2dx.dll patches")
+    mem_patch.create_patch(
+        "bm2dx.dll", Path(output, f"iidx_omnimix_{game_version}.txt")
+    )
+else:
+    print(f"Skipping bm2dx.dll version {game_version} patches")
 Path("bm2dx.dll").unlink()
-
 
 print(f"Processing music_omni_{game_version-1} json")
 music_omni.update({"data_ver": game_version})
@@ -491,10 +494,10 @@ ifstools.IFS("mdato").repack(
     path=Path(output, "data", "graphic", ver, "mdato.ifs"),
 )
 # memory patch for mdat`o` broke
-shutil.copy(
-    str(Path(output, "data", "graphic", ver, "mdato.ifs")),
-    str(Path(output, "data", "graphic", ver, "mdata.ifs")),
-)
+# shutil.copy(
+#    str(Path(output, "data", "graphic", ver, "mdato.ifs")),
+#    str(Path(output, "data", "graphic", ver, "mdata.ifs")),
+# )
 
 shutil.rmtree("mdato")
 
